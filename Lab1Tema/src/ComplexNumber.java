@@ -1,3 +1,4 @@
+
 public class ComplexNumber {
     double re;
     double im;
@@ -22,5 +23,12 @@ public class ComplexNumber {
     public ComplexNumber divide(ComplexNumber other) {
         double denominator = other.re * other.re + other.im * other.im;
         return new ComplexNumber((re * other.re + im * other.im) / denominator, (im * other.re - re * other.im) / denominator);
+    }
+    public ComplexNumber conjugate() {
+        return new ComplexNumber(re, -im);
+    }
+    @Override
+    public String toString() {
+        return re + " + " + im + " * i";
     }
 }

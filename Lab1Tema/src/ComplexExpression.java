@@ -1,7 +1,5 @@
 public abstract class ComplexExpression {
-    enum Operation {
-        ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION
-    }
+
     private ComplexNumber[] numbers;
     private Operation operation;
 
@@ -10,18 +8,20 @@ public abstract class ComplexExpression {
         this.operation = operation;
     }
 
-    public ComplexNumber execute(){
-        // execute all operations
-        for (int i = 0; i < numbers.length - 1; i++) {
-            executeOneOperation();
+    public ComplexNumber execute() {
+        //
+        ComplexNumber result = numbers[0];
+        for (int i = 1; i < numbers.length; i++) {
+            result = executeOneOperation(result, numbers[i]);
         }
-        return numbers[1];
+        return result;
     }
 
     public ComplexNumber[] getNumbers() {
         return numbers;
     }
 
-    public abstract void executeOneOperation();
-}
+    public abstract ComplexNumber executeOneOperation(ComplexNumber n1, ComplexNumber n2);
 
+
+}
