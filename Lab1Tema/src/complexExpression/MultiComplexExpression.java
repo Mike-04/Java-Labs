@@ -1,3 +1,6 @@
+package complexExpression;
+
+
 public class MultiComplexExpression extends ComplexExpression {
     public MultiComplexExpression(ComplexNumber[] numbers) {
         super(numbers, Operation.MULTIPLICATION);
