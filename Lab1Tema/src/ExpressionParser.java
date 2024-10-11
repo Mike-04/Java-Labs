@@ -12,6 +12,10 @@ public class ExpressionParser {
         String[] input = in.split(" ");
         for (String s : input) {
             System.out.println(":"+s+":");
+            if (!s.matches("[-+]?[0-9]+i?") && !s.matches("[+\\-*/]"))
+             {
+                throw new IllegalArgumentException("Invalid expression");
+            }
         }
         ComplexNumber[] args = extractComplexNumbers(input);
         Operation op = extractOperation(input);
