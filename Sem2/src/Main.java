@@ -36,5 +36,11 @@ public class Main {
             System.out.println(s);
         }
 
+        MyMap mm = new MyMap();
+        mm.add(s1);
+        mm.add(s2);
+        mm.add(s3);
+
+
     }
 }
