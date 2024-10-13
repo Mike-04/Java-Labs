@@ -4,6 +4,8 @@ import domain.MessageTask;
 import java.time.LocalDateTime;
 import static java.time.LocalDateTime.now;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import domain.SortingTask.*;
 
 
 public class Main {
@@ -25,5 +27,14 @@ public class Main {
     public static void main(String[] args) {
         Task[] tasks = createTasks();
         printTasks(tasks);
+        testSortingTask();
     }
+    //test the sorting task
+    public static void testSortingTask(){
+        int[] numbers = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5};
+        AbstractSorter sorter = new QuickSorter();
+        SortingTask sortingTask = new SortingTask("1", "Sorting numbers", numbers, sorter);
+        sortingTask.execute();
+    }
+
 }
