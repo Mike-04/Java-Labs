@@ -6,10 +6,10 @@ import java.time.format.DateTimeFormatter;
 
 public class MessageTask extends Task {
 
-    private String message;
-    private String from;
-    private String to;
-    private LocalDateTime date;
+    private final String message;
+    private final String from;
+    private final String to;
+    private final LocalDateTime date;
 
     public MessageTask(String taskID, String description,String message, String from, String to, LocalDateTime date) {
         super(taskID, description);

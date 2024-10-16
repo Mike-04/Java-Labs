@@ -4,7 +4,7 @@ import domain.Container.*;
 import domain.*;
 
 public class StrategyTaskRunner implements TaskRunner {
-    private Container container;
+    private final Container container;
 
     public StrategyTaskRunner(Strategy strategy) {
         this.container = TaskContainerFactory.getInstance().createContainer(strategy);

@@ -3,8 +3,8 @@ import domain.Task;
 import java.util.Arrays;
 
 public class SortingTask extends Task {
-    private int[] numbers;
-    private AbstractSorter sorter;
+    private final int[] numbers;
+    private final AbstractSorter sorter;
 
     public SortingTask(String taskID, String description, int[] numbers, AbstractSorter sorter) {
         super(taskID, description);

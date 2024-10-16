@@ -11,6 +11,8 @@ public abstract class Task {
         this.description = description;
     }
 
+    // Getters and Setters
+
     public String getTaskID() {
         return taskID;
     }
