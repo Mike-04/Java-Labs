@@ -34,6 +34,6 @@ public class MessageTask extends Task {
 
     @Override
     public void execute() {
-        System.out.println("Message: " + message + " date: " + date);
+        System.out.println("Message: " + message + " date: " + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     }
 }

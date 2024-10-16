@@ -23,57 +23,77 @@ public class Main {
             System.out.println(task);
         }
     }
-    public static void testContainers() {
-        // Test StackContainer (LIFO)
-        Container stack = new StackContainer();
-        stack.add(new MessageTask("1", "Stack Task 1", "Hello", "Alice", "Bob", LocalDateTime.now()));
-        stack.add(new MessageTask("2", "Stack Task 2", "World", "Carol", "Dave", LocalDateTime.now()));
-        System.out.println("StackContainer:");
-        while (!stack.isEmpty()) {
-            System.out.println(stack.remove());
-        }
 
-        // Test QueueContainer (FIFO)
-        Container queue = new QueueContainer();
-        queue.add(new MessageTask("1", "Queue Task 1", "First", "Eve", "Frank", LocalDateTime.now()));
-        queue.add(new MessageTask("2", "Queue Task 2", "Second", "George", "Hank", LocalDateTime.now()));
-        System.out.println("QueueContainer:");
-        while (!queue.isEmpty()) {
-            System.out.println(queue.remove());
-        }
-    }
-    //test the sorting task
     public static void testSortingTask(){
         int[] numbers = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5};
         AbstractSorter sorter = new QuickSorter();
         SortingTask sortingTask = new SortingTask("1", "Sorting numbers", numbers, sorter);
         sortingTask.execute();
     }
-    public static void testTaskRunner(){
+    public static void testStrategy(Strategy strategy){
         Task[] tasks = createTasks();
-        TaskRunner taskRunner = new StrategyTaskRunner(Strategy.LIFO);
+        TaskRunner taskRunner = new StrategyTaskRunner(strategy);
         for (Task task : tasks) {
             taskRunner.addTask(task);
         }
-        System.out.println("Executing tasks using LIFO strategy:");
-        while (taskRunner.hasTask()) {
-            taskRunner.executeOneTask();
-        }
-        taskRunner = new StrategyTaskRunner(Strategy.FIFO);
-        for (Task task : tasks) {
-            taskRunner.addTask(task);
-        }
-        System.out.println("Executing tasks using FIFO strategy:");
-        while (taskRunner.hasTask()) {
-            taskRunner.executeOneTask();
-        }
+        System.out.println("Executing tasks using " + strategy + " strategy:");
+        taskRunner.executeAll();
     }
+
+    public static void testStrategyPrinter(Strategy strategy){
+        Task[] tasks = createTasks();
+        TaskRunner taskRunner = new StrategyTaskRunner(strategy);
+        for (Task task : tasks) {
+            taskRunner.addTask(task);
+        }
+        System.out.println("Executing tasks using " + strategy + " strategy:");
+        taskRunner.executeAll();
+
+        TaskRunner taskRunner2 = new PrinterTaskRunner(taskRunner);
+        for (Task task : tasks) {
+            taskRunner.addTask(task);
+        }
+        System.out.println("Executing tasks using " + strategy + " strategy and printer:");
+        taskRunner2.executeAll();
+    }
+
+    public static void testAll(Strategy strategy){
+        Task[] tasks = createTasks();
+        TaskRunner taskRunner = new StrategyTaskRunner(strategy);
+        for (Task task : tasks) {
+            taskRunner.addTask(task);
+        }
+        System.out.println("Executing tasks using " + strategy + " strategy:");
+        taskRunner.executeAll();
+
+        TaskRunner taskRunner2 = new PrinterTaskRunner(taskRunner);
+        for (Task task : tasks) {
+            taskRunner.addTask(task);
+        }
+        System.out.println("Executing tasks using " + strategy + " strategy and printer:");
+        taskRunner2.executeAll();
+
+        TaskRunner taskRunner3 = new DelayTaskRunner(taskRunner);
+        for (Task task : tasks) {
+            taskRunner.addTask(task);
+        }
+        System.out.println("Executing tasks using " + strategy + " strategy and printer and delay:");
+        taskRunner3.executeAll();
+
+
+
+    }
+
+
     public static void main(String[] args) {
+        //print first arg
+        Strategy strat = Strategy.valueOf(args[0]);
         Task[] tasks = createTasks();
         printTasks(tasks);
         testSortingTask();
-        testContainers();
-        testTaskRunner();
+        testStrategy(strat);
+        testStrategyPrinter(strat);
+        testAll(strat);
 
     }
 

@@ -1,14 +1,15 @@
 package domain.TaskRunner;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class PrinterTaskRunner extends AbstractTaskRunner{
-    PrinterTaskRunner(TaskRunner taskRunner) {
+    public PrinterTaskRunner(TaskRunner taskRunner) {
         super(taskRunner);
     }
 
     private void printExecutionTime() {
         LocalDateTime now = LocalDateTime.now();
-        System.out.println("Task executed at: " + now);
+        System.out.println("Task executed at: " + now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     }
 
     @Override

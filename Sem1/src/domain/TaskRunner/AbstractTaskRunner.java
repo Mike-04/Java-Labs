@@ -3,7 +3,7 @@ package domain.TaskRunner;
 import domain.Task;
 
 public abstract class AbstractTaskRunner implements TaskRunner {
-    private TaskRunner taskRunner;
+    private final TaskRunner taskRunner;
     AbstractTaskRunner(TaskRunner taskRunner){
         this.taskRunner = taskRunner;
     }
